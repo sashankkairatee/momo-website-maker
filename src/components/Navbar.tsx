@@ -1,6 +1,8 @@
+
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,65 +43,72 @@ const Navbar = () => {
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-momoLight shadow-md py-3' : 'bg-transparent py-5'
+        isScrolled ? 'py-3' : 'py-5'
       }`}
     >
-      <div className="container-width px-4 mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <div 
-          onClick={() => scrollToSection('home')} 
-          className="flex items-center cursor-pointer"
-        >
-          <img 
-            src="/lovable-uploads/906ecb3b-9372-423f-8754-f6950c5dd236.png" 
-            alt="Momo & More Logo" 
-            className="h-12" 
-          />
-        </div>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          <a 
+      <div className={`container-width mx-auto backdrop-blur-md bg-momoLight/70 rounded-lg shadow-md ${
+        isScrolled ? 'px-4' : 'px-6'
+      }`}>
+        <div className="flex justify-between items-center py-3 px-4">
+          {/* Logo */}
+          <div 
             onClick={() => scrollToSection('home')} 
-            className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
+            className="flex items-center cursor-pointer"
           >
-            Home
-          </a>
-          <a 
-            onClick={() => scrollToSection('about')} 
-            className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
-          >
-            About
-          </a>
-          <a 
-            onClick={() => scrollToSection('menu')} 
-            className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
-          >
-            Menu
-          </a>
-          <a 
-            onClick={() => scrollToSection('contact')} 
-            className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
-          >
-            Contact
-          </a>
-        </div>
+            <img 
+              src="/lovable-uploads/906ecb3b-9372-423f-8754-f6950c5dd236.png" 
+              alt="Momo & More Logo" 
+              className="h-12" 
+            />
+          </div>
 
-        {/* Mobile Menu Button */}
-        <Button 
-          variant="ghost" 
-          size="icon"
-          className="md:hidden"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          <Menu className="h-6 w-6" />
-        </Button>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <a 
+              onClick={() => scrollToSection('home')} 
+              className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
+            >
+              Home
+            </a>
+            <a 
+              onClick={() => scrollToSection('about')} 
+              className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
+            >
+              About
+            </a>
+            <a 
+              onClick={() => scrollToSection('menu')} 
+              className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
+            >
+              Menu
+            </a>
+            <a 
+              onClick={() => scrollToSection('contact')} 
+              className="nav-link text-lg font-medium cursor-pointer hover:text-momoOrange transition-colors"
+            >
+              Contact
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Button 
+            variant="ghost" 
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
+        
+        {/* Separator */}
+        <Separator className="bg-momoOrange/30 h-0.5 mx-4" />
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-momoLight animate-fade-in">
-          <div className="px-4 py-2 space-y-4 flex flex-col shadow-lg">
+        <div className="md:hidden bg-momoLight/90 backdrop-blur-md mt-2 mx-auto container-width rounded-lg animate-fade-in">
+          <div className="px-4 py-4 space-y-4 flex flex-col shadow-lg">
             <a 
               onClick={() => scrollToSection('home')} 
               className="py-2 px-4 block font-medium hover:bg-secondary rounded-md cursor-pointer"
