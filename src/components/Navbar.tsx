@@ -43,10 +43,10 @@ const Navbar = () => {
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3' : 'py-5'
+        isScrolled ? 'py-0' : 'py-0'
       }`}
     >
-      <div className={`container-width mx-auto backdrop-blur-md bg-momoLight/70 rounded-lg shadow-md ${
+      <div className={`container-width mx-auto backdrop-blur-md bg-momoLight/70 rounded-b-lg shadow-md ${
         isScrolled ? 'px-4' : 'px-6'
       }`}>
         <div className="flex justify-between items-center py-3 px-4">
