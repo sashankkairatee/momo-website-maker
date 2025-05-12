@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Menu, WhatsApp } from 'lucide-react';
+import { Menu, MessageCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
@@ -100,7 +99,7 @@ const Navbar = () => {
               onClick={handleWhatsAppClick}
               className="text-green-600 hover:bg-green-100"
             >
-              <WhatsApp className="h-6 w-6" />
+              <MessageCircle className="h-6 w-6" />
             </Button>
           </div>
 
@@ -112,7 +111,7 @@ const Navbar = () => {
               onClick={handleWhatsAppClick}
               className="text-green-600 hover:bg-green-100"
             >
-              <WhatsApp className="h-6 w-6" />
+              <MessageCircle className="h-6 w-6" />
             </Button>
             <Button 
               variant="ghost" 
