@@ -56,22 +56,6 @@ const Navbar = () => {
     });
   };
 
-  const handleFacebookClick = () => {
-    toast({
-      title: "Facebook",
-      description: "Follow us on Facebook",
-      duration: 5000,
-    });
-  };
-
-  const handleInstagramClick = () => {
-    toast({
-      title: "Instagram",
-      description: "Follow us on Instagram",
-      duration: 5000,
-    });
-  };
-
   return (
     <nav 
       className="fixed top-0 w-full z-50 transition-all duration-300"
@@ -122,30 +106,18 @@ const Navbar = () => {
             >
               Map
             </a>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <Button 
                 variant="ghost" 
                 size="icon"
                 onClick={handleWhatsAppClick}
                 className="text-green-600 hover:bg-green-100"
               >
-                <MessageCircle className="h-6 w-6" />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={handleFacebookClick}
-                className="text-blue-600 hover:bg-blue-100"
-              >
-                <Facebook className="h-6 w-6" />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={handleInstagramClick}
-                className="text-pink-600 hover:bg-pink-100"
-              >
-                <Instagram className="h-6 w-6" />
+                <img 
+                  src="/lovable-uploads/33897046-fc1a-47aa-98ce-ab0efe59c72a.png" 
+                  alt="WhatsApp Icon" 
+                  className="h-6 w-6"
+                />
               </Button>
             </div>
           </div>
@@ -165,57 +137,52 @@ const Navbar = () => {
                 <div className="bg-[#FF8C00] text-white h-full flex flex-col">
                   <div className="flex justify-end p-4">
                     <DrawerClose asChild>
-                      <Button variant="ghost" size="icon" className="text-white hover:bg-orange-600">
+                      <Button variant="ghost" size="icon" className="text-white hover:bg-orange-600 drawer-close">
                         <X className="h-6 w-6" />
                       </Button>
                     </DrawerClose>
                   </div>
                   <div className="flex flex-col items-center justify-center flex-1 space-y-8 text-xl font-medium">
-                    <a 
-                      onClick={() => {
-                        scrollToSection('home');
-                        document.querySelector('.drawer-close')?.dispatchEvent(new Event('click'));
-                      }}
-                      className="cursor-pointer text-white hover:text-gray-200"
-                    >
-                      HOME
-                    </a>
-                    <a 
-                      onClick={() => {
-                        scrollToSection('about');
-                        document.querySelector('.drawer-close')?.dispatchEvent(new Event('click'));
-                      }}
-                      className="cursor-pointer text-white hover:text-gray-200"
-                    >
-                      ABOUT
-                    </a>
-                    <a 
-                      onClick={() => {
-                        scrollToSection('menu');
-                        document.querySelector('.drawer-close')?.dispatchEvent(new Event('click'));
-                      }}
-                      className="cursor-pointer text-white hover:text-gray-200"
-                    >
-                      MENU
-                    </a>
-                    <a 
-                      onClick={() => {
-                        scrollToSection('contact');
-                        document.querySelector('.drawer-close')?.dispatchEvent(new Event('click'));
-                      }}
-                      className="cursor-pointer text-white hover:text-gray-200"
-                    >
-                      CONTACT
-                    </a>
-                    <a 
-                      onClick={() => {
-                        scrollToSection('map');
-                        document.querySelector('.drawer-close')?.dispatchEvent(new Event('click'));
-                      }}
-                      className="cursor-pointer text-white hover:text-gray-200"
-                    >
-                      MAP
-                    </a>
+                    <DrawerClose asChild>
+                      <a 
+                        onClick={() => scrollToSection('home')}
+                        className="cursor-pointer text-white hover:text-gray-200"
+                      >
+                        HOME
+                      </a>
+                    </DrawerClose>
+                    <DrawerClose asChild>
+                      <a 
+                        onClick={() => scrollToSection('about')}
+                        className="cursor-pointer text-white hover:text-gray-200"
+                      >
+                        ABOUT
+                      </a>
+                    </DrawerClose>
+                    <DrawerClose asChild>
+                      <a 
+                        onClick={() => scrollToSection('menu')}
+                        className="cursor-pointer text-white hover:text-gray-200"
+                      >
+                        MENU
+                      </a>
+                    </DrawerClose>
+                    <DrawerClose asChild>
+                      <a 
+                        onClick={() => scrollToSection('contact')}
+                        className="cursor-pointer text-white hover:text-gray-200"
+                      >
+                        CONTACT
+                      </a>
+                    </DrawerClose>
+                    <DrawerClose asChild>
+                      <a 
+                        onClick={() => scrollToSection('map')}
+                        className="cursor-pointer text-white hover:text-gray-200"
+                      >
+                        MAP
+                      </a>
+                    </DrawerClose>
                   </div>
                   
                   {/* Separator line */}
@@ -231,12 +198,16 @@ const Navbar = () => {
                       onClick={handleWhatsAppClick}
                       className="text-white hover:bg-orange-600"
                     >
-                      <MessageCircle className="h-6 w-6" />
+                      <img 
+                        src="/lovable-uploads/33897046-fc1a-47aa-98ce-ab0efe59c72a.png" 
+                        alt="WhatsApp Icon" 
+                        className="h-6 w-6"
+                      />
                     </Button>
                     <Button 
                       variant="ghost" 
                       size="icon"
-                      onClick={handleFacebookClick}
+                      onClick={handleWhatsAppClick}
                       className="text-white hover:bg-orange-600"
                     >
                       <Facebook className="h-6 w-6" />
@@ -244,7 +215,7 @@ const Navbar = () => {
                     <Button 
                       variant="ghost" 
                       size="icon"
-                      onClick={handleInstagramClick}
+                      onClick={handleWhatsAppClick}
                       className="text-white hover:bg-orange-600"
                     >
                       <Instagram className="h-6 w-6" />

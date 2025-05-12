@@ -24,6 +24,7 @@ const Footer = () => {
   };
 
   const handleWhatsAppClick = () => {
+    // This can be changed to a direct link to WhatsApp
     toast({
       title: "WhatsApp Contact",
       description: "+1 123-456-7890",
@@ -32,24 +33,18 @@ const Footer = () => {
   };
 
   const handleFacebookClick = () => {
-    toast({
-      title: "Facebook",
-      description: "Follow us on Facebook",
-      duration: 5000,
-    });
+    // This can be changed to open your Facebook page
+    window.open('https://facebook.com/your-page', '_blank');
   };
 
   const handleInstagramClick = () => {
-    toast({
-      title: "Instagram",
-      description: "Follow us on Instagram",
-      duration: 5000,
-    });
+    // This can be changed to open your Instagram page
+    window.open('https://instagram.com/your-handle', '_blank');
   };
 
   return (
     <footer className="bg-momoDark text-white pt-24 pb-16 mt-24">
-      <div className="container-width px-6">
+      <div className="container-width px-6 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
             <img 
@@ -78,7 +73,11 @@ const Footer = () => {
                 onClick={handleWhatsAppClick}
                 className="bg-momoOrange p-2 rounded-full hover:bg-momoAccent transition-colors"
               >
-                <MessageCircle className="w-5 h-5" />
+                <img 
+                  src="/lovable-uploads/33897046-fc1a-47aa-98ce-ab0efe59c72a.png" 
+                  alt="WhatsApp Icon" 
+                  className="w-5 h-5"
+                />
               </Button>
             </div>
           </div>
