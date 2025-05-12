@@ -1,13 +1,19 @@
 
+import { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 
 const Hero = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
   const foodItems = [
     {
       name: "Steaming Momos",
@@ -31,6 +37,28 @@ const Hero = () => {
     }
   ];
 
+  useEffect(() => {
+    if (!api) return;
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
+  // Auto-slide effect
+  useEffect(() => {
+    const autoSlideInterval = setInterval(() => {
+      if (api) {
+        api.scrollNext();
+      }
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(autoSlideInterval);
+  }, [api]);
+
   return (
     <div id="home" className="relative min-h-screen bg-gradient-to-b from-slate-900/70 to-slate-900/30 flex items-center justify-center">
       <div 
@@ -43,13 +71,7 @@ const Hero = () => {
         }}
       ></div>
       <div className="container mx-auto text-center px-4">
-        <img 
-          src="/lovable-uploads/906ecb3b-9372-423f-8754-f6950c5dd236.png" 
-          alt="Momo & More Logo" 
-          className="mx-auto mb-6 h-24 md:h-32"
-        />
-        
-        <Carousel className="max-w-3xl mx-auto">
+        <Carousel className="max-w-3xl mx-auto" setApi={setApi}>
           <CarouselContent>
             {foodItems.map((item, index) => (
               <CarouselItem key={index} className="px-1">
