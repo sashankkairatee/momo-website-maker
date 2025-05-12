@@ -21,8 +21,8 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-momoDark text-white pt-16 pb-8">
-      <div className="container-width">
+    <footer className="bg-momoDark text-white pt-24 pb-8 mt-12">
+      <div className="container-width px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
             <img 
@@ -110,7 +110,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 pt-8 mt-8 text-center text-gray-400">
+        <div className="border-t border-gray-700 pt-8 mt-12 text-center text-gray-400">
           <p>&copy; {currentYear} Momo & More. All rights reserved.</p>
         </div>
       </div>

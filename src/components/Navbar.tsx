@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, WhatsApp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/hooks/use-toast";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { toast } = useToast();
 
   // Handle scroll event
   useEffect(() => {
@@ -40,15 +42,19 @@ const Navbar = () => {
     }
   };
 
+  const handleWhatsAppClick = () => {
+    toast({
+      title: "WhatsApp Contact",
+      description: "+1 123-456-7890",
+      duration: 5000,
+    });
+  };
+
   return (
     <nav 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'py-0' : 'py-0'
-      }`}
+      className="fixed top-0 w-full z-50 transition-all duration-300"
     >
-      <div className={`container-width mx-auto backdrop-blur-md bg-momoLight/70 rounded-b-lg shadow-md ${
-        isScrolled ? 'px-4' : 'px-6'
-      }`}>
+      <div className="container-width mx-auto backdrop-blur-md bg-white/80 shadow-md">
         <div className="flex justify-between items-center py-3 px-4">
           {/* Logo */}
           <div 
@@ -88,27 +94,44 @@ const Navbar = () => {
             >
               Contact
             </a>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={handleWhatsAppClick}
+              className="text-green-600 hover:bg-green-100"
+            >
+              <WhatsApp className="h-6 w-6" />
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <Button 
-            variant="ghost" 
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
+          <div className="md:hidden flex items-center space-x-2">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={handleWhatsAppClick}
+              className="text-green-600 hover:bg-green-100"
+            >
+              <WhatsApp className="h-6 w-6" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
         </div>
         
         {/* Separator */}
-        <Separator className="bg-momoOrange/30 h-0.5 mx-4" />
+        <Separator className="bg-momoOrange/30 h-0.5" />
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-momoLight/90 backdrop-blur-md mt-2 mx-auto container-width rounded-lg animate-fade-in">
-          <div className="px-4 py-4 space-y-4 flex flex-col shadow-lg">
+        <div className="md:hidden bg-white/90 backdrop-blur-md mt-2 mx-auto container-width animate-fade-in shadow-lg">
+          <div className="px-4 py-4 space-y-4 flex flex-col">
             <a 
               onClick={() => scrollToSection('home')} 
               className="py-2 px-4 block font-medium hover:bg-secondary rounded-md cursor-pointer"

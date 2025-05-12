@@ -4,8 +4,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 
@@ -48,13 +46,21 @@ const Hero = () => {
     });
   }, [api]);
 
-  // Auto-slide effect
+  // Auto-slide effect with loop functionality
   useEffect(() => {
     const autoSlideInterval = setInterval(() => {
       if (api) {
-        api.scrollNext();
+        // Check if we're at the last slide, if so, navigate to the first
+        const currentIndex = api.selectedScrollSnap();
+        const totalSlides = api.scrollSnapList().length;
+        
+        if (currentIndex === totalSlides - 1) {
+          api.scrollTo(0);
+        } else {
+          api.scrollNext();
+        }
       }
-    }, 5000); // 5 seconds
+    }, 10000); // 10 seconds
 
     return () => clearInterval(autoSlideInterval);
   }, [api]);
@@ -84,10 +90,6 @@ const Hero = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-center gap-4 mt-4">
-            <CarouselPrevious className="relative inline-flex h-10 w-10" />
-            <CarouselNext className="relative inline-flex h-10 w-10" />
-          </div>
         </Carousel>
         
         <div className="mt-8 animate-fade-in">
