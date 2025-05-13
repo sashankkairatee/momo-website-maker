@@ -92,7 +92,7 @@ const ContactForm = () => {
 
       <Button
         type="submit"
-        className="bg-momoOrange hover:bg-momoAccent w-full py-6 text-lg"
+        className="bg-[#e67e22] hover:bg-[#d35400] w-full py-6 text-lg"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Sending..." : "Send Message"}

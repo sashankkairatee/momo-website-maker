@@ -27,7 +27,7 @@ const Navbar = () => {
           className="fixed top-0 w-full z-50 transition-all duration-300"
         >
           <div className="container-width mx-auto backdrop-blur-md bg-white/80 shadow-md">
-            <div className="flex justify-between items-center py-3 px-4">
+            <div className="flex justify-between items-center py-3 px-6 md:px-10 lg:px-16">
               {/* Logo */}
               <Logo scrollToSection={scrollToSection} />
 

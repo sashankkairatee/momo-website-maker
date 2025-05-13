@@ -15,13 +15,13 @@ const Contact = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg">
             <h3 className="text-2xl font-bold mb-6 text-momoDark">Send a Message</h3>
             <ContactForm />
           </div>
           
           <div className="flex flex-col">
-            <div className="bg-white p-8 mb-6 rounded-lg shadow-lg">
+            <div className="bg-white p-6 md:p-8 mb-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold mb-6 text-momoDark">Location & Hours</h3>
               
               <div className="space-y-6">
