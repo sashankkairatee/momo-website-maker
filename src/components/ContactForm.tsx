@@ -43,9 +43,9 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium mb-2">
+        <label htmlFor="name" className="block text-sm font-medium mb-1.5">
           Name
         </label>
         <Input
@@ -60,7 +60,7 @@ const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-2">
+        <label htmlFor="email" className="block text-sm font-medium mb-1.5">
           Email
         </label>
         <Input
@@ -76,7 +76,7 @@ const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium mb-2">
+        <label htmlFor="message" className="block text-sm font-medium mb-1.5">
           Message
         </label>
         <Textarea
@@ -86,13 +86,13 @@ const ContactForm = () => {
           onChange={handleChange}
           placeholder="Your message..."
           required
-          className="w-full min-h-[150px]"
+          className="w-full min-h-[120px]"
         />
       </div>
 
       <Button
         type="submit"
-        className="bg-[#e67e22] hover:bg-[#d35400] w-full py-6 text-lg"
+        className="bg-[#e67e22] hover:bg-[#d35400] w-full py-2.5 md:py-3 text-base md:text-lg"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Sending..." : "Send Message"}
