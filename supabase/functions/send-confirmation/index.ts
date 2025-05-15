@@ -52,7 +52,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       // Send confirmation email to the customer
       const customerEmailResult = await resend.emails.send({
-        from: "Momo & More <onboarding@resend.dev>", // Using Resend's default domain for testing
+        from: "Momo & More <momoandmore01@gmail.com>", // Updated sender email
         to: [email],
         subject: "🙌 Thank You for Contacting Momo & More!",
         html: `
@@ -87,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       // Send notification email to restaurant
       const notificationEmailResult = await resend.emails.send({
-        from: "Momo & More <onboarding@resend.dev>", // Using Resend's default domain for testing
+        from: "Momo & More <momoandmore01@gmail.com>", // Updated sender email
         to: ["momoandmore01@gmail.com"], // Restaurant email
         subject: "📩 New Contact Form Submission - Momo & More",
         html: `
