@@ -44,46 +44,66 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // Send confirmation email to the customer
-    const customerEmail = await resend.emails.send({
+    const customerEmailPromise = resend.emails.send({
       from: "Momo & More <onboarding@resend.dev>",
       to: [email],
-      subject: "Thank you for contacting Momo & More!",
+      subject: "🙌 Thank You for Contacting Momo & More!",
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #e67e22;">Thank You for Contacting Us!</h2>
-          <p>Dear ${name},</p>
-          <p>We have received your message and will get back to you as soon as possible.</p>
-          <p>Here's a summary of your message:</p>
-          <div style="background-color: #f8f8f8; padding: 15px; border-left: 4px solid #e67e22; margin: 20px 0;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
+          <h2 style="color: #e67e22; border-bottom: 1px solid #e67e22; padding-bottom: 10px;">Thank You for Contacting Us!</h2>
+          <p>Dear <strong>${name}</strong>,</p>
+          <p>We appreciate you reaching out to <strong>Momo & More</strong>. 🍜</p>
+          <p>Our team has received your message and will get back to you as soon as possible.</p>
+          <p><strong>Here's what you submitted:</strong></p>
+          <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #e67e22; margin: 15px 0;">
             ${message}
           </div>
-          <p>Best regards,<br>The Momo & More Team</p>
+          <p>Until then, stay hungry 😋 and thanks for thinking of us!</p>
+          <p>Warm regards,<br/><strong>The Momo & More Team</strong></p>
+          <hr/>
+          <p style="font-size: 12px; color: #888;">This is an automated message from <a href="https://momo-website-maker.lovable.app/" target="_blank">momoandmore.com</a></p>
         </div>
       `,
     });
 
     // Send notification email to restaurant
-    const notificationEmail = await resend.emails.send({
+    const restaurantEmail = "momoandmore01@gmail.com";
+    const notificationEmailPromise = resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
-      to: ["info@momoandmore.com"], // Replace with the restaurant's email
-      subject: "New Contact Form Submission",
+      to: [restaurantEmail], 
+      subject: "📩 New Contact Form Submission - Momo & More",
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #e67e22;">New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <div style="background-color: #f8f8f8; padding: 15px; border-left: 4px solid #e67e22; margin: 20px 0;">
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
+          <h2 style="color: #e67e22; border-bottom: 1px solid #e67e22; padding-bottom: 10px;">🍜 New Contact Form Submission</h2>
+          <p><strong>👤 Name:</strong> ${name}</p>
+          <p><strong>📧 Email:</strong> ${email}</p>
+          <p><strong>📝 Message:</strong></p>
+          <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #e67e22; margin: 15px 0;">
             ${message}
           </div>
+          <p style="font-size: 12px; color: #888;">This message was sent from your contact form on <a href="https://momo-website-maker.lovable.app/" target="_blank">your website</a>.</p>
         </div>
       `,
     });
 
-    console.log("Emails sent successfully:", { customerEmail, notificationEmail });
+    // Wait for both emails to be sent
+    const [customerEmailResult, notificationEmailResult] = await Promise.all([
+      customerEmailPromise,
+      notificationEmailPromise
+    ]);
+
+    // Log the results for debugging
+    console.log("Email results:", {
+      customerEmail: customerEmailResult,
+      notificationEmail: notificationEmailResult
+    });
 
     return new Response(
-      JSON.stringify({ success: true }),
+      JSON.stringify({ 
+        success: true,
+        customerEmailStatus: customerEmailResult?.error ? "failed" : "sent",
+        notificationEmailStatus: notificationEmailResult?.error ? "failed" : "sent" 
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },

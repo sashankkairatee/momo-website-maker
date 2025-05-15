@@ -6,7 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { supabase } from "@/integrations/supabase/client";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -45,23 +44,33 @@ const ContactForm = () => {
         }
       );
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send message");
+        throw new Error(data.error || "Failed to send message");
       }
 
-      // Show success toast
-      toast({
-        title: "Message sent!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
-      });
-      
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
+      // Show appropriate toast based on the email delivery status
+      if (data.customerEmailStatus === "sent") {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for contacting us. We'll get back to you soon.",
+        });
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        // Show warning if customer email failed but message was saved
+        toast({
+          variant: "default",
+          title: "Message received",
+          description: "Your message was saved but there was an issue sending the confirmation email. We'll still get back to you soon.",
+        });
+      }
     } catch (err: any) {
       console.error("Error submitting form:", err);
       setError(err.message || "Something went wrong. Please try again.");
