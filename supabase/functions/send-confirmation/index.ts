@@ -3,7 +3,7 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.0";
 
-// Initialize Resend with the new API key from environment variables
+// Initialize Resend with API key from environment variables
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 // Set up CORS headers
@@ -50,9 +50,9 @@ const handler = async (req: Request): Promise<Response> => {
     let notificationEmailError = null;
 
     try {
-      // Send confirmation email to the customer using Resend's verified domain
+      // Send confirmation email to the customer
       const customerEmailResult = await resend.emails.send({
-        from: "Momo & More <onboarding@resend.dev>", // Using Resend's default verified domain
+        from: "Momo & More <momoandmore01@gmail.com>", // Updated sender email
         to: [email],
         subject: "🙌 Thank You for Contacting Momo & More!",
         html: `
@@ -87,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       // Send notification email to restaurant
       const notificationEmailResult = await resend.emails.send({
-        from: "Momo & More <onboarding@resend.dev>", // Using Resend's default verified domain
+        from: "Momo & More <momoandmore01@gmail.com>", // Updated sender email
         to: ["momoandmore01@gmail.com"], // Restaurant email
         subject: "📩 New Contact Form Submission - Momo & More",
         html: `
